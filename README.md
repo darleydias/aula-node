@@ -17,3 +17,5 @@ npm install alguma coisa, ele cria a pasta noder_modules
 
 Posso apagar a pasta node_modules, por exemplo para versionar e depois consigo remontar o projeto com o comando "npm install" (sem nada depois do install). 
 
+Deu Pau
+
