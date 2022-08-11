@@ -13,7 +13,7 @@
   "paths": {
     "/comarcas": {
       "get": {
-        "description": "",
+        "description": "lista de comarcas",
         "parameters": [],
         "responses": {
           "200": {
