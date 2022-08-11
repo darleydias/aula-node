@@ -20,27 +20,7 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/camarcas/{codigo}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/camarcas": {
+      },
       "post": {
         "description": "",
         "parameters": [],
@@ -62,6 +42,24 @@
       "delete": {
         "description": "",
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/comarcas/{codigo}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
