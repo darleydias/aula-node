@@ -11,36 +11,12 @@
     "http"
   ],
   "paths": {
-    "/comarcas": {
+    "/": {
       "get": {
-        "description": "lista de comarcas",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
+        "tags": [
+          "Principal"
+        ],
+        "description": "Página Pricipal",
         "parameters": [],
         "responses": {
           "200": {
@@ -49,9 +25,107 @@
         }
       }
     },
+    "/comarcas": {
+      "get": {
+        "tags": [
+          "Comarcas"
+        ],
+        "description": "lista de comarcas ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Comarcas"
+        ],
+        "description": "Inserir uma comarca",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "descri": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Comarcas"
+        ],
+        "description": "Atualizar uma comarca",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "descri": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
     "/comarcas/{codigo}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Comarcas"
+        ],
+        "description": "Pesquisar uma comarca",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Comarcas"
+        ],
+        "description": "Apagar uma comarca",
         "parameters": [
           {
             "name": "codigo",
