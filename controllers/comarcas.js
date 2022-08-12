@@ -1,13 +1,18 @@
+const Comarcas = require('../models/comarcas')
 exports.incluir = (req,res)=>{
   // #swagger.tags = ['Comarcas']
   // #swagger.description = "Inserir uma comarca" 
-    let comarca ={
-         codigo:req.body.codigo,
-         nome:req.body.nome,
-         descri:req.body.descri
-    }
-res.status(201).send('Inserindo comarcas')
-console.log(comarca)
+    
+// res.status(201).send('Inserindo comarcas')
+console.log(req.body)
+
+Comarcas.create(req.body,(err,data)=>{
+  if(err){
+    res.status(501).send("erro ao conectar")
+  }else{
+    res.status(501).send("Comarca Criada")
+  }
+})
 }
 exports.listar = (req,res)=>{
     // #swagger.tags = ['Comarcas']
@@ -15,7 +20,7 @@ exports.listar = (req,res)=>{
     let comarca =[{
       codigo:"01",
       nome:"BH",
-      descri:"Comarca de BH"
+      descricao:"Comarca de BH"
     },
     {
       codigo:"02",
