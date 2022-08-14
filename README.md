@@ -39,5 +39,6 @@ https://mongoosejs.com/
 [19:39] valdairelaborata (Convidado)
     
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
+
 <https://teams.microsoft.com/l/message/19:Tjq-XqrsJhpQe7PxhboHT9j2LeJVzhoy3WAXTRo4YjI1@thread.tacv2/1660343996682?tenantId=f138c62b-ba24-43bc-acda-1e759859d452&amp;groupId=c288cabe-f020-4040-87e1-b4c631dd6a4d&amp;parentMessageId=1660340810190&amp;teamName=Back-End com NodeJs, Npm, Yarn e MongoDB - 12797&amp;channelName=Geral&amp;createdTime=1660343996682>
 

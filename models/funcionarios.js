@@ -1,11 +1,11 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
-var comarcaSchema = new Schema({
+var funcionarioSchema = new Schema({
+    // codigo:{type:String,require:true,unique:true,select:false},
     codigo:{type:String,require:true,unique:true},
-    // codigo:{_id: 'entityId',type:String,require:true,unique:true,select:false},
     nome:{type:String,require:true},
-    descricao:{type:String},
+    cdescricaoodigo:{type:String},
     dataCriacao:{type:Date,default:Date.now()},
 })
 
-module.exports = mongoose.model('Comarcas',comarcaSchema)
+module.exports = mongoose.model('Funcionario',funcionarioSchema)

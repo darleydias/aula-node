@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controllers/comarcas');
-
-// Posso colocar só '/' aoinves de '/comarca' porque isso está setado em app.js no use
+var controller = require('../controllers/evidencias');
 
 router.post('/',controller.incluir);
 router.get('/',controller.listar);

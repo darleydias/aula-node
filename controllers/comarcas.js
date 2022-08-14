@@ -1,56 +1,78 @@
 const Comarcas = require('../models/comarcas')
-exports.incluir = (req,res)=>{
+
+exports.incluir = async (req,res)=>{
   // #swagger.tags = ['Comarcas']
   // #swagger.description = "Inserir uma comarca" 
-    
-// res.status(201).send('Inserindo comarcas')
-console.log(req.body)
+      
+  // res.status(201).send('Inserindo comarcas')
+  console.log(req.body)
 
-Comarcas.create(req.body,(err,data)=>{
-  if(err){
-    res.status(501).send("erro ao conectar")
-  }else{
-    res.status(501).send("Comarca Criada")
-  }
-})
+  //let result = await Comarcas.create(req.body)
+
+  await Comarcas.create(req.body,(err,data)=>{
+    if(err){
+      res.status(501).send("erro ao Gravar Comarca")
+    }else{
+      res.status(201).send("Comarca Criada")
+    }
+  })
 }
-exports.listar = (req,res)=>{
+
+
+exports.listar = async (req,res)=>{
     // #swagger.tags = ['Comarcas']
-    // #swagger.description = "lista de comarcas " 
-    let comarca =[{
-      codigo:"01",
-      nome:"BH",
-      descricao:"Comarca de BH"
-    },
-    {
-      codigo:"02",
-      nome:"Contagem",
-      descri:"Comarca de Contagem"
-    }]
-    res.status(200).send('segue lista')
-    console.log((comarca))
+    // #swagger.description = "lista d
+    let comarcas = await Comarcas.find({})
+    res.status(200).send(comarcas)
+    console.log((comarcas))
 }
-exports.buscar = (req,res)=>{
+exports.buscar = async (req,res)=>{
   // #swagger.tags = ['Comarcas']
   // #swagger.description = "Pesquisar uma comarca" 
-  console.log(JSON.stringify(req.params.codigo))
-  res.status(200).send('Buscar uma Comarca')
+  let comarcas = await Comarcas.find({codigo:req.params.codigo})
+  res.status(200).send(comarcas)
+  console.log((comarcas))
 }
+
+// ###########  ATUALIZAR #################
+
+
 exports.atualizar = (req,res)=>{
-  // #swagger.tags = ['Comarcas']
-  // #swagger.description = "Atualizar uma comarca" 
-  let comarca ={
-    codigo:req.body.codigo,
-    nome:req.body.nome,
-    descri:req.body.descri
-  }
-  console.log(JSON.stringify(req.params.codigo))
-  res.status(201).send('Atualizando')
-  console.log(comarca)
+  Comarcas.findOneAndUpdate(
+    { codigo: req.params.codigo },
+    {
+      $set: {
+        nome: req.body.nome,
+        descricao: req.body.descri
+      }
+    }).then(docs=>{
+      if (docs===null){
+        console.log("codigo não exite");
+        res.status(201).send("codigo não exite")
+      }else{
+          console.log(" Atualizado : ", docs);
+          res.status(200).send("Atualizado")
+      }  ole.log("Comarca atualizada")
+    }
+  )
+  
 }
-exports.apagar = (req,res)=>{
-   // #swagger.tags = ['Comarcas']
+
+exports.apagar = async (req,res)=>{
+  // #swagger.tags = ['Comarcas']
   // #swagger.description = "Apagar uma comarca" 
-  console.log(JSON.stringify(req.params.codigo))
-  res.status(200).send('Apagando')
+  
+  await Comarcas.findOneAndDelete({ codigo: req.params.codigo })
+  .then(docs=>{
+          if (docs===null){
+              console.log("codigo não exite");
+              res.status(201).send("codigo não exite")
+          }else{
+              console.log(" Apagado : ", docs);
+              res.status(200).send("Apagado")
+          }  
+  })
+  .catch(error=>{
+    console.error(error)
+  })
 }
