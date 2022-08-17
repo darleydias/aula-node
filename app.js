@@ -42,7 +42,7 @@ app.get('/', (req, res)=> {
  res.status(200).send('Pagina Principal')
 })
 
-
-app.listen(3000, function() {
-  console.log('App de Exemplo escutando na porta 3000!');
-})
+app.listen(process.env.PORT||3000)
+// app.listen(3000, function() {
+//   console.log('App de Exemplo escutando na porta 3000!');
+// })
