@@ -1,4 +1,5 @@
 const Comarcas = require('../models/comarcas')
+const { body, validationResult } = require('express-validator');
 
 exports.incluir = async (req,res)=>{
   // #swagger.tags = ['Comarcas']
