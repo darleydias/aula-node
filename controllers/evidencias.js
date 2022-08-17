@@ -13,8 +13,8 @@ exports.incluir = async (req,res)=>{
               console.log("\n>> Categoria Criada:\n", docEvidencia);
               tiposEvidencia.findOneAndUpdate(
               filter,
-                { evidencias: docEvidencia._id}
-                // { new: true, useFindAndModify: false }
+                { evidencias: docEvidencia._id},
+                { new: true, useFindAndModify: false }
               ).exec();
               res.status(201).send("Evidencia criada")
               return docEvidencia;

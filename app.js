@@ -2,18 +2,23 @@ const express = require('express')
 const app = express()
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger_output.json')
+const expressValitador = require('express-validator')
 
 const routeComarcas = require('./routes/comarcas')
+const routeUsuarios = require('./routes/usuarios')
 const routeEvidencias = require('./routes/evidencias')
 const routeTipoEvidencias = require('./routes/tiposEvidencia')
-
+const routeLogin = require('./routes/login')
+const middlewares = require('./middlewares/middlewares')
 const mongoose = require('mongoose')
 const url ='mongodb+srv://darleydias:Catelecom()123@cluster0.vwjrt2z.mongodb.net/?retryWrites=true&w=majority'
  
 app.use('/static',express.static('public'))
 app.use(express.json()) // pega o valor do body e transforma em json
 app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
-app.use('/comarcas',routeComarcas)
+app.use('/usuarios',routeUsuarios)
+app.use('/login',routeLogin)
+app.use('/comarcas',middlewares.isAuth,routeComarcas)
 app.use('/evidencias',routeEvidencias)
 app.use('/tiposEvidencia',routeTipoEvidencias)
 

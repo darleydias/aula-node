@@ -5,7 +5,7 @@ var tiposEvidenciaSchema = new Schema({
     descricao:{type:String,require:true},
     evidencias:[{
         type:Schema.Types.ObjectId,
-        ref:"evidencias"
+        ref:"Evidencias"
     }],
     dataCriacao:{type:Date,default:Date.now()}
 })

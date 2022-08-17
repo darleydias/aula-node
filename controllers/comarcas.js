@@ -4,11 +4,6 @@ exports.incluir = async (req,res)=>{
   // #swagger.tags = ['Comarcas']
   // #swagger.description = "Inserir uma comarca" 
       
-  // res.status(201).send('Inserindo comarcas')
-  console.log(req.body)
-
-  //let result = await Comarcas.create(req.body)
-
   await Comarcas.create(req.body,(err,data)=>{
     if(err){
       res.status(501).send("erro ao Gravar Comarca")
@@ -17,7 +12,6 @@ exports.incluir = async (req,res)=>{
     }
   })
 }
-
 
 exports.listar = async (req,res)=>{
     // #swagger.tags = ['Comarcas']
