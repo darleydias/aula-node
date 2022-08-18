@@ -25,19 +25,152 @@
         }
       }
     },
-    "/comarcas": {
+    "/usuarios/": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Inserir um usuario",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "Comarcas"
+          "Usuario"
         ],
-        "description": "lista de comarcas ",
+        "description": "lista de Usuaŕios",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           }
         }
+      }
+    },
+    "/usuarios/{codigo}": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Pesquisar um usuario",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Atualiar um usuario",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "usuario": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Apagar um Usuario",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/login/": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Página de Login",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/comarcas/": {
       "post": {
         "tags": [
           "Comarcas"
@@ -45,58 +178,38 @@
         "description": "Inserir uma comarca",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "codigo": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "descri": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "auth",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "501": {
+            "description": "Not Implemented"
           }
         }
       },
-      "put": {
+      "get": {
         "tags": [
           "Comarcas"
         ],
-        "description": "Atualizar uma comarca",
+        "description": "lista d",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "codigo": {
-                  "example": "any"
-                },
-                "nome": {
-                  "example": "any"
-                },
-                "descri": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "auth",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
@@ -113,11 +226,61 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "descri": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       },
@@ -132,11 +295,368 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/evidencias/": {
+      "post": {
+        "tags": [
+          "Evidências"
+        ],
+        "description": "Inserir uma evidência",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipoEvid_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Evidências"
+        ],
+        "description": "lista de Evidências",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/evidencias/{codigo}": {
+      "get": {
+        "tags": [
+          "Evidências"
+        ],
+        "description": "Buscar de Evidências",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Evidências"
+        ],
+        "description": "Atualizar Evidências",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipoEvid_id": {
+                  "example": "any"
+                },
+                "descricao": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                },
+                "dtColeta": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Evidências"
+        ],
+        "description": "Apagar uma Evidência",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/tiposEvidencia/": {
+      "post": {
+        "tags": [
+          "Tipos de evidência"
+        ],
+        "description": "Inserir um tipo de evidência",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Tipos de evidência"
+        ],
+        "description": "Lista de tipo de evidências",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/tiposEvidencia/{codigo}": {
+      "get": {
+        "tags": [
+          "Tipos de evidência"
+        ],
+        "description": "Buscar tipos de Evidências",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tipos de evidência"
+        ],
+        "description": "Atualizar tipos de evidências",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "example": "any"
+                },
+                "descricao": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tipos de evidência"
+        ],
+        "description": "Apagar um tipo de evidência",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/tiposEvidencia/{codigo}/evidencias": {
+      "get": {
+        "tags": [
+          "Tipos de evidência"
+        ],
+        "description": "Lista de tipo de evidências",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
