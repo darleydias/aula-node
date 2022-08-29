@@ -1,14 +1,14 @@
-const Comarcas = require('../models/comarcas')
+const ItemMenu = require('../models/itemMenu')
 
 exports.incluir = async (req,res)=>{
-  // #swagger.tags = ['Comarcas']
-  // #swagger.description = "Inserir uma comarca" 
-      
-  await Comarcas.create(req.body,(err,data)=>{
+  // #swagger.tags = ['ItemMenu']
+  // #swagger.description = "Inserir uma item de menu" 
+  console.log(req.body)
+  await ItemMenu.create(req.body,(err,data)=>{
     if(err){
-      res.status(501).send("erro ao Gravar Comarca")
+      res.status(501).send("Erro ao gravar")
     }else{
-      res.status(201).send("Comarca Criada")
+      res.status(201).send("Item de menu Criado")
     }
   })
 }
@@ -16,28 +16,30 @@ exports.incluir = async (req,res)=>{
 exports.listar = async (req,res)=>{
     // #swagger.tags = ['Comarcas']
     // #swagger.description = "lista d
-    let comarcas = await Comarcas.find({})
-    res.status(200).send(comarcas)
-    console.log((comarcas))
+    let itemMenu = await ItemMenu.find({})
+    res.status(200).send(itemMenu)
+    console.log((itemMenu))
 }
 exports.buscar = async (req,res)=>{
-  // #swagger.tags = ['Comarcas']
-  // #swagger.description = "Pesquisar uma comarca" 
-  let comarcas = await Comarcas.find({codigo:req.params.codigo})
-  res.status(200).send(comarcas)
-  console.log((comarcas))
+  // #swagger.tags = ['ItemMenu']
+  // #swagger.description = "Pesquisar um item de menu" 
+  let itemMenu = await ItemMenu.find({codigo:req.params.codigo})
+  res.status(200).send(itemMenu)
+  console.log((itemMenu))
 }
 
 // ###########  ATUALIZAR #################
 
 
 exports.atualizar = (req,res)=>{
-  Comarcas.findOneAndUpdate(
+  ItemMenu.findOneAndUpdate(
     { codigo: req.params.codigo },
     {
       $set: {
         nome: req.body.nome,
-        descricao: req.body.descri
+        classe: req.body.classe,
+        href:req.body.href,
+        img:req.body.img
       }
     }).then(docs=>{
       if (docs===null){
@@ -46,17 +48,17 @@ exports.atualizar = (req,res)=>{
       }else{
           console.log(" Atualizado : ", docs);
           res.status(200).send("Atualizado")
-      }  ole.log("Comarca atualizada")
+      }  ole.log("Item de menu atualizada")
     }
   )
   
 }
 
 exports.apagar = async (req,res)=>{
-  // #swagger.tags = ['Comarcas']
-  // #swagger.description = "Apagar uma comarca" 
+  // #swagger.tags = ['Item de Menu']
+  // #swagger.description = "Apagar um item de menu" 
   
-  await Comarcas.findOneAndDelete({ codigo: req.params.codigo })
+  await ItemMenu.findOneAndDelete({ codigo: req.params.codigo })
   .then(docs=>{
           if (docs===null){
               console.log("codigo não exite");

@@ -47,3 +47,7 @@ Meddlewares
 express-validator
 
 jsonwebtoken
+
+Build bancoMongoose a65f3471
+
+git flow
