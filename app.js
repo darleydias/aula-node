@@ -19,7 +19,6 @@ app.use(express.json()) // pega o valor do body e transforma em json
 app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
 app.use('/usuarios',routeUsuarios)
 app.use('/login',routeLogin)
-// app.use('/comarcas',middlewares.isAuth,routeComarcas)
 app.use('/comarcas',routeComarcas)
 app.use('/evidencias',routeEvidencias)
 app.use('/itemMenu',routeItemMenu)
