@@ -46,7 +46,7 @@ exports.atualizar = (req,res)=>{
       }else{
           console.log(" Atualizado : ", docs);
           res.status(200).send("Atualizado")
-      }  ole.log("Comarca atualizada")
+      }  
     }
   )
   
