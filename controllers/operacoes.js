@@ -16,7 +16,7 @@ exports.listar = async (req,res)=>{
     // #swagger.tags = ['Operações']
     // #swagger.description = "lista de operações"
     let operacoes = await Operacoes.find({})
-    console.log((typeof operacoes))
+    res.status(200).send(operacoes)
     // console.log((operacoes))
 }
 exports.buscar = async (req,res)=>{
