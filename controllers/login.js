@@ -7,7 +7,7 @@ exports.login = async (req,res)=>{
     var usuarioLogado = await Usuario.findOne({login:req.body.login})
     if(usuarioLogado!=null){
         if(req.body.senha==usuarioLogado.senha){
-            var token = jwt.sign({id:req.body.login},"yhvh77",{expiresIn:'1m'})
+            var token = jwt.sign({id:req.body.login},"yhvh77",{expiresIn:'30m'})
             res.status(200).send(token)
         }else{
             res.status(403).send({error:"Senha Inválida"})
