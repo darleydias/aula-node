@@ -1,14 +1,19 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
-var usuarioSchema = new Schema({
-    codigo:{type:String,require:true,unique:true},
-    nome:{type:String,require:true},
-    login:{type:String,require:true},
-    senha:{type:String},
-    img:{type:String},
-    funcao:{type:String},
-    setor:{type:String},
-    dataCriacao:{type:Date,default:Date.now()}
-})
-
-module.exports = mongoose.model('Usuarios',usuarioSchema)
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Usuarios = sequelize.define('Usuarios', {
+    codigo: DataTypes.STRING,
+    nome: DataTypes.STRING,
+    login: DataTypes.STRING,
+    senha: DataTypes.STRING,
+    img: DataTypes.STRING,
+    funcao: DataTypes.STRING,
+    setor: DataTypes.STRING,
+    email: DataTypes.STRING,
+    token: DataTypes.STRING,
+    expireIn: DataTypes.DATE
+  }, {});
+  Usuarios.associate = function(models) {
+    // associations can be defined here
+  };
+  return Usuarios;
+};

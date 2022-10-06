@@ -51,3 +51,165 @@ jsonwebtoken
 Build bancoMongoose a65f3471
 
 git flow
+
+
+#### INTRODUÇÃO DO BANCO MYSQL E SEQUELISE 1995  sudo git checkout -b comModais
+ 
+sudo git checkout -b comMysql
+
+sudo git add .
+
+sudo git commit -m "modais e validacao login"
+
+sudo git push --set-upstream origin comMysql
+
+mysql -u root
+
+create database 'db_catena'
+
+GRANT ALL PRIVILEGES ON db_catena.* TO 'catena'@'localhost' identify by 'catena';
+
+flush privileges;
+
+Crescentar no packages.json :
+
+    "mysql2": "^2.3.3",
+
+    "sequelize": "^5.21.7",
+
+    "sequelize-cli": "^5.5.1",
+
+
+sudo rm -rf node_modules 
+
+sudo npm i
+
+#### Inicializano pastas sequelize
+
+npx sequelize-cli init (não faça com sudo!!!!)
+
+
+
+foram geradas as pastas:
+
+config/config.json
+
+models
+
+migrations
+
+seeders
+
+#### configurar arquivo config/config.json:
+
+  "development": {
+    "username": "catena",
+    "password": "catena",
+    "database": "db_catena",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+
+#### Criando modelos
+
+https://sequelize.org/docs/v6/core-concepts/model-basics/#data-types
+
+npx sequelize-cli model:create --name Comarcas --attributes codigo:string,nome:string,descricao:string
+
+Arquivo Model: 
+
+Comarcas.init({
+    codigo: DataTypes.STRING,
+    nome: DataTypes.STRING,
+    descricao: DataTypes.STRING
+}
+
+
+#### Criando migrates
+
+npx sequelize-cli db:migrate
+
+#### Criando seed
+
+npx sequelize-cli seed:generate --name demo-comarcas
+
+
+#### Populando seed
+
+
+async up (queryInterface, Sequelize) {
+
+    await queryInterface.bulkInsert('Comarcas', [{
+      codigo:"bh",
+      nome: 'Belo Horizonte',
+      descricao:"Comarca especial",
+      createdAt:new Date(),
+      updatedAt:new Date()
+    }, 
+    {
+      codigo:"SB",
+      nome: 'Sabará',
+      descricao:"Ordinária",
+      createdAt:new Date(),
+      updatedAt:new Date()
+    },
+    {
+      codigo:"BT",
+      nome: 'Betim',
+      descricao:"Comarca especial",
+      createdAt:new Date(),
+      updatedAt:new Date()
+    }
+  
+  ],{});
+  },
+
+  async down (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Comarcas', null, {});
+    
+  }
+
+  
+npx sequelize-cli db:seed:all
+
+
+
+#### Criando controller
+
+https://sequelize.org/v5/manual/querying.html#where
+
+const database = require("../models")
+
+class ComarcaController{
+    static async listarComarcas(req,res){
+        try {
+            const listaComarcas = await database.Comarcas.findAll()
+            res.status(200).json({listaComarcas})   
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
+    }
+    ....
+}
+module.exports  = ComarcaController
+
+### Erro
+
+Estava dando um erro maldito:
+
+/home/darley/nomenos/aula-node/node_modules/sequelize/lib/sequelize.js:496
+      this.importCache[importPath] = defineCall(this, DataTypes);
+                                     ^
+
+TypeError: defineCall is not a function
+    at Sequelize.import (/home/darley/nomenos/aula-node/node_modules/sequelize/lib/sequelize.js:496:38)
+
+"Era porque tinha um arquivo login.js na pasta models vazio" !!!!!
+
+#### Criando model usuarios
+npx sequelize-cli model:create --name Usuarios --attributes codigo:string,nome:string,login:string,senha:string,img:string,funcao:string,setor:string,email:string,token:string,expireIn:date
+
+
+
+
+
