@@ -49,15 +49,35 @@ class UsuariosController{
             res.status(500).json(error.message) 
         }
     }
-    static async findLoggedUserByToken(req,res){
-        const {token} =req.params
+    static async findIdLoggedUserByToken(refresh){
         try {
-            const usuario = await database.Usuarios.findAll({where:{token:token}})
-            res.status(200).json(usuario)   
+            const usuario = await database.Usuarios.findOne({where:{token:refresh}})
+            return usuario.id
         } catch (error) {
-            res.status(500).json(error.message)
+            return error
         }
     }
+    static async isValidRefresh(refresh){
+        try {
+            const usuario = await database.Usuarios.findOne({where:{token:refresh}})
+            if(usuario.token!=''){
+                //console.log({'nome':usuario.expireIn})
+                let dataAtual = new Date()
+                dataAtual = dataAtual.setHours(dataAtual.getHours()-3)
+                let expireIn =usuario.expireIn.getTime()
+                if(dataAtual > expireIn){
+                    console.log("logar")
+                    return false
+                }else{
+                    console.log("trocar token")
+                    return true
+                }
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+        
         
 }
 module.exports  = UsuariosController

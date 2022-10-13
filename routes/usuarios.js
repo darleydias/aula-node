@@ -6,7 +6,7 @@ var controller = require('../controllers/UsuariosController');
 
 router.post('/',controller.criarUsuario);
 router.get('/',controller.listarUsuarios);
-router.get('/:token',controller.findLoggedUserByToken);
+router.get('/:refresh',controller.isValidRefresh);
 router.get('/:id',controller.buscarUsuarioById);
 router.put('/:id',controller.atualizarUsuario);
 router.delete('/:id',controller.excluirUsuario);

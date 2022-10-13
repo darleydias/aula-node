@@ -14,16 +14,21 @@ exports.login = async (req,res)=>{
             // Crio Token
             var token = jwt.sign({id:req.body.login},"yhvh77",{expiresIn:'1m'})
             //Crio refresh
-            const tokenOpaco = cripto.randomBytes(24).toString('hex');
+            const refresh = cripto.randomBytes(24).toString('hex');
             //defini data expiração
             const dataAtual = new Date()
             dataAtual.setHours(dataAtual.getHours()-3)
-            dataExpiracao =dataAtual.setMonth(dataAtual.getMonth()+1)
+            // dataExpiracao =dataAtual.setMonth(dataAtual.getMonth()+1)
+            const minutos = dataAtual.getMinutes()+2
+            const dataExpiracao = dataAtual.setMinutes(minutos)
+            
             //preencho dado pra gravar e gravo
-            let data = {'token':tokenOpaco,'expireIn':dataExpiracao}
+            let data = {'token':refresh,'expireIn':dataExpiracao}
+            
             await database.Usuarios.update(data,{where:{id:usuarioLogado.id}})
            
-            res.status(200).send({'token':token,'refreshToken':tokenOpaco})
+            res.status(200).send({'token':token,'refreshToken':refresh,'funcao':usuarioLogado.funcao,'email':usuarioLogado.email,'setor':usuarioLogado.setor})
+
         }else{
             res.status(403).send({error:"Senha Inválida"})
         }
