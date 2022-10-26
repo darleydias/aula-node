@@ -1,5 +1,5 @@
 const database = require("../models")
-
+const Recon = require("../models/recon")
 class UsuariosController{
     static async listarUsuarios(req,res){
         try {
@@ -77,7 +77,15 @@ class UsuariosController{
             console.log(error.message)
         }
     }
-        
-        
+    static async criarEquipeRecon(req,res){
+        const { userId } = req.params
+        const equipe= {...req.body,usuario_id:Number(userId)}
+        try {
+            const novaEquipe = await database.Equiperecon.create(equipe)
+            res.status(200).json({novaEquipe})  
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
+    }  
 }
 module.exports  = UsuariosController

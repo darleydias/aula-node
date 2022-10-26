@@ -12,7 +12,7 @@ exports.login = async (req,res)=>{
     if(usuarioLogado!=null){
         if(req.body.senha==usuarioLogado.senha){
             // Crio Token
-            var token = jwt.sign({id:req.body.login},"yhvh77",{expiresIn:'1m'})
+            var token = jwt.sign({id:req.body.login},"yhvh77",{expiresIn:'20m'})
             //Crio refresh
             const refresh = cripto.randomBytes(24).toString('hex');
             //defini data expiração

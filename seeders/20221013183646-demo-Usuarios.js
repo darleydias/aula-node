@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Usuarios', [
+  async up (queryInterface, Sequelize) {
+      await queryInterface.bulkInsert('Usuarios', [
         {
-        codigo:"1",
+        codigo:"134",
         nome: 'Darley Wilson Dias',
         login: 'darley',
         senha: '123123',
@@ -18,7 +18,7 @@ module.exports = {
         updatedAt:new Date()
       },{
         codigo:"2",
-        nome: 'Darleu Naoppelao',
+        nome: 'Darley Napoleao',
         login: 'napo',
         senha: '123000',
         img:'1096241.png',
@@ -46,13 +46,9 @@ module.exports = {
     ], {});
   },
 
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+  async down (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Usuarios', null, {});
+    
   }
-};
+}
+

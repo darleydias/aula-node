@@ -1,4 +1,10 @@
+
+
 'use strict';
+
+const Equiperecon = require('./equiperecon')
+// const Recons = require('./recon')
+
 module.exports = (sequelize, DataTypes) => {
   const Usuarios = sequelize.define('Usuarios', {
     codigo: DataTypes.STRING,
@@ -11,9 +17,37 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     token: DataTypes.STRING,
     expireIn: DataTypes.DATE
-  }, {});
-  Usuarios.associate = function(models) {
-    // associations can be defined here
-  };
-  return Usuarios;
-};
+  }, {}); 
+    Usuarios.associate = function(models) {
+      
+    //   Usuarios.belongsToMany(models.Recon,{
+    //     through:{
+    //       model:Equiperecon
+    //     },
+    //     foreignKey:'usuario_id',
+    //     constraints:true
+    // })
+   
+    //    Usuarios.hasMany(Equiperecon,{foreignKey:'usuario_id'})
+    //    Equiperecon.belongsTo(Usuarios,{foreignKey:'usuario_id'})
+    
+    }
+    return Usuarios;
+  };  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

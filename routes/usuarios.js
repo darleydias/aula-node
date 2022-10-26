@@ -6,9 +6,10 @@ var controller = require('../controllers/UsuariosController');
 
 router.post('/',controller.criarUsuario);
 router.get('/',controller.listarUsuarios);
-router.get('/:refresh',controller.isValidRefresh);
+// router.get('/:refresh',controller.isValidRefresh);
 router.get('/:id',controller.buscarUsuarioById);
 router.put('/:id',controller.atualizarUsuario);
 router.delete('/:id',controller.excluirUsuario);
+router.post('/:userId/equipe',controller.criarEquipeRecon)
 
 module.exports = router;

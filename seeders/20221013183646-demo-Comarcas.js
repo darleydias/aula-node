@@ -35,3 +35,4 @@ async down (queryInterface, Sequelize) {
 }
 
 };
+
