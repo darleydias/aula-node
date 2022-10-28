@@ -1,19 +1,31 @@
 var jwt  =require("jsonwebtoken")
 var { body, validationResult } =require("express-validator")
+const UsuariosController = require("../controllers/UsuariosController")
 
 exports.isAuth= (req,res,next)=>{
+    
     let token = req.headers.auth
+    let refresh = req.headers.refresh
+
     let valido = jwt.verify(token,"yhvh77",(err,encoded)=>{
         if(!err){
             console.log(encoded)
             next()
         }else{
-        console.log(err)
-        return res.status(403).json({msg:'Acesso não permitido'})
+            // se retornar true = Trocal token ; false = enviar msg pra login
+            if(UsuariosController.isValidRefresh(refresh)){// refresh ainda está válido
+                const usuario =UsuariosController.findIdLoggedUserByToken(refresh)
+                var token = jwt.sign({id:usuario.login},"yhvh77",{expiresIn:'1m'})
+                res.status(203).json({token:token,refresh:refresh})
+             }else{
+                console.log(err)
+                res.status(403).json({msg:'Acesso não permitido'})
+            }
         }
     })
-
 }
+
+
 exports.validacao =
 (req,res,next) => {
 [

@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controllers/funcoes');
+var controller = require('../controllers/FuncoesController')
 
-router.post('/',controller.incluir);
-router.get('/',controller.listar);
-router.get('/:codigo',controller.buscar);
-router.put('/:codigo',controller.atualizar);
-router.delete('/:codigo',controller.apagar);
+router.post('/',controller.criarFuncao);
+router.get('/',controller.listarFuncoes);
+router.get('/:id',controller.buscarFuncaoById);
+router.put('/:id',controller.atualizarFuncao);
+router.delete('/:id',controller.excluirFuncao);
 
 module.exports = router;
